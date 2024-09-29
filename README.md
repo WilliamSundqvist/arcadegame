@@ -83,6 +83,15 @@ It's the way that Godot is set up, and therefor I find it the easiest way to cre
 - Use descriptive names for variables and functions.
 
 
+## License
+
+This project is licensed under the **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)**. This means that:
+
+- You may share and adapt the material, but **not for commercial purposes**.
+- Any changes or improvements must be shared under the same license.
+
+See the [LICENSE](./LICENSE) file for the full license text.
+
 ## Credits
 
 - Project Lead: **William Sundqvist**
