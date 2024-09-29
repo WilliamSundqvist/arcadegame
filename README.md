@@ -20,18 +20,18 @@ Before you start contributing or testing, make sure you have the following insta
 - **Python**: Required to run a local server for testing the highscore connection. [Download Python](https://www.python.org/downloads/).
 - **Web Server**: To be able to test the highscore part of the project. The project needs to be hosted locally on `localhost:8080` for testing highscore functionality. You can use Python's built-in HTTP server for this.
 
-\`\`\`bash
-# Navigate to the folder where 'webpage_export' is located and run:
+```
+#Navigate to the folder where 'webpage_export' is located and run:
 python3 -m http.server 8080
-\`\`\`
+```
 
 ## Setup
 
 1. **Clone the repository**:
-   \`\`\`bash
+   ```
    git clone https://github.com/WilliamSundqvist/arcadegame.git
    cd arcadegame
-   \`\`\`
+   ```
 
 2. **Open the project in Godot**:
    - Launch Godot 4.3.
@@ -40,9 +40,9 @@ python3 -m http.server 8080
 3. **Run the local web server for testing highscores**:
    - Ensure Python is installed.
    - Navigate to the `webpage_export` directory and run the following command:
-     \`\`\`bash
+     ```
      python3 -m http.server 8080
-     \`\`\`
+     ```
    - The project will now be accessible on `localhost:8080`.
 
 4. **Test the highscore functionality**:
@@ -64,17 +64,17 @@ It's the way that Godot is set up, and therefor I find it the easiest way to cre
 
 1. **Fork the repository**.
 2. **Create a branch** for your feature or bugfix:
-   \`\`\`bash
+   ```
    git checkout -b feature-name
-   \`\`\`
+   ```
 3. **Make your changes** in Godot and/or GDScript files.
 4. **Commit and push** your changes to your fork:
-   \`\`\`bash
+   ```
    git add .
    git commit -m "Added feature X"
    git push origin feature-name
-   \`\`\`
-5. **Create a pull request** on the main repository, detailing what changes you have made and why. (This step is not necessary let the chaos of pushing straight to main begin!)
+   ```
+5. **Create a pull request** on the main repository, detailing what changes you have made and why. (**This step is not necessary let the chaos of pushing straight to main begin!**)
 
 ### Coding Guidelines
 
