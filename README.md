@@ -1,6 +1,7 @@
 
 # Godot 4.3 Project - Highscore Connection Setup
-**Ta följande med en nypa salt, det är ett game jam så jag är redo för fullt chaos! Men skrev ihop lite tillsammans med ai, kan vara bra för att få en överblick :D **
+
+### Ta följande med en nypa salt, det är ett game jam så jag är redo för fullt chaos! Men skrev ihop lite tillsammans med ai, kan vara bra för att få en överblick :D
 
 This project is a basic setup for a Godot 4.3 project, designed to connect to **Hyplays** server for highscore tracking. It also includes a basic structure for a game, with features such as volume control, a music player, and a start menu. 
 
@@ -15,7 +16,7 @@ This project is a basic setup for a Godot 4.3 project, designed to connect to **
 
 Before you start contributing or testing, make sure you have the following installed:
 
-- **Godot Engine 4.3**: This project is built with Godot 4.3. [Download it here](https://godotengine.org/download).
+- **Godot Engine 4.3**: This project is built with Godot 4.3 (not C# version!!). [Download it here](https://godotengine.org/download).
 - **Python**: Required to run a local server for testing the highscore connection. [Download Python](https://www.python.org/downloads/).
 - **Web Server**: To be able to test the highscore part of the project. The project needs to be hosted locally on `localhost:8080` for testing highscore functionality. You can use Python's built-in HTTP server for this.
 
@@ -84,6 +85,6 @@ It's the way that Godot is set up, and therefor I find it the easiest way to cre
 
 ## Credits
 
-- Project Lead: **[Your Name]**
+- Project Lead: **William Sundqvist**
 - Contributors: List of contributors
 - Highscore system powered by **Hyplay's free server**.
