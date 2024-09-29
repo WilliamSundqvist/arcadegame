@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3g446y7uyog1"]
+
+[ext_resource type="Script" path="res://global/settings.gd" id="1_btj2g"]
+[ext_resource type="PackedScene" uid="uid://clbucm0mfdjkt" path="res://global/volume_slider.tscn" id="1_l378c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0d6nr"]
+bg_color = Color(0.48786, 0.791698, 1, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.250933, 0.4326, 1, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="Theme" id="Theme_bflw5"]
+Panel/styles/panel = SubResource("StyleBoxFlat_0d6nr")
+
+[sub_resource type="LabelSettings" id="LabelSettings_2ga73"]
+font_size = 30
+
+[node name="Settings" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_btj2g")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="Panel" type="Panel" parent="CenterContainer"]
+custom_minimum_size = Vector2(600, 250)
+layout_mode = 2
+theme = SubResource("Theme_bflw5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel"]
+custom_minimum_size = Vector2(550, 0)
+layout_mode = 2
+offset_left = 25.0
+offset_top = 12.0
+offset_right = 575.0
+offset_bottom = 195.0
+alignment = 1
+
+[node name="SettingsLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_2ga73")
+horizontal_alignment = 1
+
+[node name="MasterLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Master volume"
+horizontal_alignment = 1
+
+[node name="MasterVolumeSlider" parent="CenterContainer/Panel/VBoxContainer" instance=ExtResource("1_l378c")]
+layout_mode = 2
+bus_name = "Master"
+
+[node name="MusicLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Music volume"
+horizontal_alignment = 1
+
+[node name="MusicVolumeSlider" parent="CenterContainer/Panel/VBoxContainer" instance=ExtResource("1_l378c")]
+layout_mode = 2
+bus_name = "music"
+
+[node name="SfxLabel" type="Label" parent="CenterContainer/Panel/VBoxContainer"]
+layout_mode = 2
+text = "Sound effects volume"
+horizontal_alignment = 1
+
+[node name="SfxVolumeSlider2" parent="CenterContainer/Panel/VBoxContainer" instance=ExtResource("1_l378c")]
+layout_mode = 2
+bus_name = "sfx"
+
+[node name="BackButton" type="Button" parent="CenterContainer/Panel"]
+layout_mode = 0
+offset_left = 13.0
+offset_top = 8.0
+offset_right = 58.0
+offset_bottom = 39.0
+text = "Back"
