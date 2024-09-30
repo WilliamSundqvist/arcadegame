@@ -8,52 +8,63 @@ extends Node2D
 @onready var score_container: VBoxContainer = $CenterContainer/VBoxContainer/ScrollContainer/ScoreContainer
 @onready var login_button: Button = $CenterContainer/VBoxContainer/LoginButton
 
-const APP_URL = "http://localhost:8080/ArcadeGame.html" # Should be changed to itch.io page before final release
-const OAUTH_URL = "https://hyplay.com/oauth/authorize/?appId=525f4753-8c75-4516-8b21-050d42f0c514&chain=HYCHAIN_TESTNET&responseType=token&redirectUri="+APP_URL
 const APP_ID = "525f4753-8c75-4516-8b21-050d42f0c514"
 const LEADERBOARD_ID = "b3a4adfd-ffe1-4c48-b259-6b88e4a30092"
 const LEADERBOARD_KEY = "leaderboard_czZAnLDyzFWPAo-D3PyB64Pc2O8newKLl3MPcxQU3pDIxnyYg2ywlg4bqxRM6Gd5"
 const GAME_SCENE_PATH = "res://game/game.tscn"
 var token = ""
 var user_id = ""
+var oauth_url = "https://hyplay.com/oauth/authorize/?appId=525f4753-8c75-4516-8b21-050d42f0c514&chain=HYCHAIN_TESTNET&responseType=token&redirectUri="
+var app_url = "http://localhost:8080/ArcadeGame.html"
 
 # --- Initialization and Setup ---
 func _ready() -> void:
-	http_request.request_completed.connect(_on_request_completed)
-	token = _get_token_from_url() # Looks for auth token in the end of URL, will be empty on first load
-	print("Access token: ", token)
-
-	# Set up button visibility based on token availability
-	if token != "":
-		login_button.visible = false
-		leaderboard_button.visible = true
-		submit_highscore_button.visible = true
-		print("Access token found, fetching user ID...")
-		_get_current_user_id(token)
-	else:
-		login_button.visible = true
-		leaderboard_button.visible = false
-		submit_highscore_button.visible = false
-
-	# Connect button pressed signals
+	# Connect signals
 	play_game_button.connect("pressed", _on_play_button_pressed)
 	submit_highscore_button.connect("pressed", _on_submit_button_pressed)
 	leaderboard_button.connect("pressed", _on_leaderboard_button_pressed)
 	login_button.connect("pressed", _on_login_button_pressed)
+	
+	http_request.request_completed.connect(_on_request_completed)
+	
+	app_url = _get_current_url()
+	token = _get_token_from_url() # Looks for auth token in the end of URL, will be empty on first load
+	print("Access token: ", token)
+	print("Test")
+	# Set up button visibility based on token availability
+	if token == "":
+		login_button.visible = true
+		leaderboard_button.visible = false
+		submit_highscore_button.visible = false
+		return
+		
+	login_button.visible = false
+	leaderboard_button.visible = true
+	submit_highscore_button.visible = true
+	print("Access token found, fetching user ID...")
+	_get_current_user_id(token)
+
+
+
+
+func _get_current_url() -> String:
+	var current_url = JavaScriptBridge.eval("window.location.href;")
+	print(current_url)
+	return current_url
 
 # --- Utility Functions ---
 func _get_token_from_url() -> String:
 	var token = JavaScriptBridge.eval("window.location.hash.substr(1);")
 	if token == null or token == "":
 		return ""
-	print("URL fragment: ", token)
 	var token_part = token.split("=")
 	if token_part.size() > 1:
 		return token_part[1]
 	return ""
 
 func _redirect_to_login() -> void:
-	OS.shell_open(OAUTH_URL)
+	JavaScriptBridge.eval("window.top.location=\"" + oauth_url + app_url + "\";")
+	#OS.shell_open(OAUTH_URL) apparently best way is to use js
 
 # Hash with leaderboard key, user ID, and score for saving highscores
 func generate_score_hash(leaderboard_key: String, user_id: String, score: int) -> String:
