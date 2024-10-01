@@ -49,6 +49,8 @@ func _ready() -> void:
 
 func _get_current_url() -> String:
 	var current_url = JavaScriptBridge.eval("window.location.href;")
+	if !current_url:
+		return ""
 	print(current_url)
 	return current_url
 

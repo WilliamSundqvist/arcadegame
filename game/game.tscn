@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://byihbnp8mskmt"]
+[gd_scene load_steps=4 format=3 uid="uid://byihbnp8mskmt"]
 
 [ext_resource type="Texture2D" uid="uid://djagwe2l6epfp" path="res://icon.svg" id="1_5np3w"]
 [ext_resource type="Script" path="res://game/game.gd" id="1_kv3x3"]
+[ext_resource type="PackedScene" uid="uid://bwm5b0abmd5pj" path="res://player_character/player_character.tscn" id="3_vybl6"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_kv3x3")
@@ -14,3 +15,5 @@ texture = ExtResource("1_5np3w")
 offset_right = 70.0
 offset_bottom = 31.0
 text = "Settings"
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("3_vybl6")]
