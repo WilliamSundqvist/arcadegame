@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://d0yu8osq6i4ig"]
+
+[ext_resource type="Texture2D" uid="uid://cc5owoow82ee2" path="res://devil_cow/devil_cow.png" id="1_6y1op"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdywn"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(0, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcfej"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(212, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xji74"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(424, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1nhv"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(636, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqhd3"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(848, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ak6m"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(1060, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11vie"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(1272, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc66n"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(1484, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fop31"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(1696, 0, 212, 212)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uu1jd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdywn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcfej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xji74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1nhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqhd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ak6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11vie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc66n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fop31")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="DevilCow" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_uu1jd")
+autoplay = "default"
+frame_progress = 0.0350657
