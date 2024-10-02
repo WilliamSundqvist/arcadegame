@@ -15,7 +15,8 @@ func process(character: PlayerCharacter, delta):
 	# Handle sprinting (running)
 	if Input.is_action_pressed("sprint"):
 		move_speed = run_speed
-
+	if Input.is_action_just_pressed("dash"):
+		character.change_state(character.state_dash)
 	# Collect input for WASD movement
 	if Input.is_action_pressed("left"):
 		input_vector.x -= 1  # Move left
