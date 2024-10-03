@@ -20,6 +20,10 @@ config/icon="res://icon.svg"
 SceneManager="*res://global/scene_manager.gd"
 MusicPlayer="*res://music/music_player.tscn"
 
+[global_group]
+
+Player="Spelaren"
+
 [input]
 
 left={
