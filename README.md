@@ -40,9 +40,9 @@ python3 -m http.server 8080
 3. **Run the local web server for testing highscores**:
    - Ensure Python is installed.
    - Navigate to the `webpage_export` directory and run the following command:
-     ```
-     python3 -m http.server 8080
-     ```
+	 ```
+	 python3 -m http.server 8080
+	 ```
    - The project will now be accessible on `localhost:8080`.
 
 4. **Test the highscore functionality**:
