@@ -7,7 +7,7 @@ class_name DevilCow
 var healthPoints: int 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	healthPoints = 4
+	healthPoints = 100
 	pass # Replace with function body.
 
 

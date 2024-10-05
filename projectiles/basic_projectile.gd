@@ -6,7 +6,7 @@ var dir : Vector2
 var velocity = Vector2.ZERO
 var markerPosition : Vector2
 var targetPosition : Vector2
-@export var damage: int = 1
+@export var damage: int = 30
 
 func _ready():
 	position = markerPosition

@@ -1,0 +1,136 @@
+[gd_scene load_steps=13 format=3 uid="uid://4ug5ffx3rfs3"]
+
+[ext_resource type="Shader" path="res://spells/BrandW.gdshader" id="1_f6lqf"]
+[ext_resource type="Script" path="res://spells/brand_w.gd" id="1_pbc40"]
+[ext_resource type="Texture2D" uid="uid://jjg72unwrfsy" path="res://spells/brandw.png" id="2_k8jeo"]
+[ext_resource type="Texture2D" uid="uid://cw3eubwkhaict" path="res://spells/flame_particle.png" id="4_6eaoo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7kqvw"]
+radius = 40.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p0abq"]
+shader = ExtResource("1_f6lqf")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/force = -0.5
+
+[sub_resource type="Animation" id="Animation_dis1w"]
+resource_name = "BeginAnimation"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0.1, 0.1), Vector2(0.8, 0.8)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/force")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6, 1, 1.33333, 1.76667, 2),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2),
+"update": 0,
+"values": [-0.5, 0.0, -0.29, -0.075, -0.415, 0.02]
+}
+
+[sub_resource type="Animation" id="Animation_q07sl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.43, 0.43)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/force")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_it40o"]
+_data = {
+"BeginAnimation": SubResource("Animation_dis1w"),
+"RESET": SubResource("Animation_q07sl")
+}
+
+[sub_resource type="Curve" id="Curve_dxee1"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.314607, 185.934), 0.0, 0.0, 0, 0, Vector2(0.505618, -19.7802), 0.0, 0.0, 0, 0, Vector2(0.719101, 193.846), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Curve" id="Curve_nnab1"]
+_data = [Vector2(0.011236, 0.538462), 0.0, 0.0, 0, 0, Vector2(0.292135, 0.703297), 0.0, 2.08645, 0, 0, Vector2(0.5, 0.505494), 0.0, -1.61586, 0, 0, Vector2(1, 0.010989), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Gradient" id="Gradient_aaob3"]
+offsets = PackedFloat32Array(0, 0.0533333, 0.24, 0.38, 0.706667, 1)
+colors = PackedColorArray(0.505882, 0.137255, 0.215686, 1, 0.941176, 0.470588, 0.243137, 1, 1, 0.658824, 0.380392, 1, 0.780392, 0.305882, 0.2, 1, 0.572549, 0.156863, 0.243137, 1, 0.372549, 0.101961, 0.160784, 0.486275)
+
+[node name="BrandW" type="Area2D" groups=["Projectile"]]
+script = ExtResource("1_pbc40")
+
+[node name="CollisionRadius" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_7kqvw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+material = SubResource("ShaderMaterial_p0abq")
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("2_k8jeo")
+
+[node name="FirstAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_it40o")
+}
+autoplay = "BeginAnimation"
+
+[node name="FlamingPillar" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 1000
+lifetime = 0.3
+one_shot = true
+speed_scale = 0.4
+randomness = 1.0
+texture = ExtResource("4_6eaoo")
+emission_shape = 1
+emission_sphere_radius = 40.0
+direction = Vector2(0, -1)
+spread = 0.0
+gravity = Vector2(0, -980)
+initial_velocity_max = 290.0
+angular_velocity_min = -45.0
+angular_velocity_max = 45.0
+angular_velocity_curve = SubResource("Curve_dxee1")
+scale_amount_min = 0.0
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_nnab1")
+color_ramp = SubResource("Gradient_aaob3")
+
+[node name="CastTime" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Duration" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="FirstAnimation" to="." method="_on_first_animation_animation_finished"]

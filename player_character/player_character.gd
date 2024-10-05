@@ -4,6 +4,7 @@ class_name PlayerCharacter
 @onready var dashTimer: Timer = $dashTimer
 @onready var fireTimer = $fireTimer
 @onready var projectile = load("res://projectiles/basicProjectile.tscn")
+@onready var brand_w = load("res://spells/BrandW.tscn")
 @export var camera: Camera2D
 @onready var blastEffect = load("res://effects/blastEffect.tscn")
 var current_state: State = null
@@ -25,7 +26,9 @@ func _physics_process(delta):
 	if Input.is_action_pressed("shoot") and fireTimer.is_stopped():
 		shoot()
 		fireTimer.start(fireRate)
-		
+	
+	if Input.is_action_pressed("Q"):
+		cast_spell()
 		
 		
 func change_state(new_state: State):
@@ -47,5 +50,12 @@ func shoot():
 	instance.targetPosition = get_global_mouse_position()
 	instance.markerPosition = $Sprite/Marker2D.global_position
 	level_root.add_child(instance)
+	
+func cast_spell():
+	var level_root = get_parent().get_parent()
+	var brand_w_instance = brand_w.instantiate()
+	brand_w_instance.global_position = get_global_mouse_position()
+	level_root.add_child(brand_w_instance)
+
 	
 	
