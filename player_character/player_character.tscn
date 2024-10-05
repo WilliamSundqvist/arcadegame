@@ -16,6 +16,12 @@ shape = SubResource("CapsuleShape2D_8frko")
 scale = Vector2(0.15, 0.2)
 texture = ExtResource("2_gxu0s")
 
+[node name="Marker2D" type="Marker2D" parent="Sprite"]
+
 [node name="dashTimer" type="Timer" parent="."]
 wait_time = 0.05
+one_shot = true
+
+[node name="fireTimer" type="Timer" parent="."]
+wait_time = 0.25
 one_shot = true

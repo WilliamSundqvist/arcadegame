@@ -4,8 +4,10 @@ class_name DevilCow
 
 @export var cow_speed: float = 150.0       # Speed when sprinting
 @onready var player = $"../PlayerCharacter"
+var healthPoints: int 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	healthPoints = 4
 	pass # Replace with function body.
 
 
@@ -17,3 +19,18 @@ func _process(delta):
 	
 	input_vector = (player.position - position).normalized()
 	position += delta * cow_speed * input_vector
+
+func is_hit(damage):
+	
+	healthPoints -= damage
+	print(healthPoints)
+	if(healthPoints <= 0):
+		queue_free()
+
+
+
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("Projectile"):
+		is_hit(area.damage)
