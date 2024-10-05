@@ -14,7 +14,6 @@ func process(character: PlayerCharacter, delta):
 		character.position += direction * dashSpeed * delta
 		canDash = false
 		dashing = true
-		print("dsa")
 		character.dashTimer.start()
 		await character.dashTimer.timeout
 		canDash = true

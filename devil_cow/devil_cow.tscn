@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://d0yu8osq6i4ig"]
+[gd_scene load_steps=14 format=3 uid="uid://d0yu8osq6i4ig"]
 
 [ext_resource type="Texture2D" uid="uid://cc5owoow82ee2" path="res://devil_cow/devil_cow.png" id="1_6y1op"]
+[ext_resource type="Script" path="res://devil_cow/collision_shape_2d.gd" id="2_hrq67"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gdywn"]
 atlas = ExtResource("1_6y1op")
@@ -73,9 +74,21 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7lx4"]
+radius = 38.6394
+
 [node name="DevilCow" type="Node2D"]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D"]
 sprite_frames = SubResource("SpriteFrames_uu1jd")
 autoplay = "default"
 frame_progress = 0.0350657
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-34, 12)
+shape = SubResource("CircleShape2D_x7lx4")
+script = ExtResource("2_hrq67")
+
+[connection signal="body_entered" from="Area2D" to="Area2D/CollisionShape2D" method="_on_area_2d_body_entered"]
