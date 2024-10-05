@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bwm5b0abmd5pj"]
+[gd_scene load_steps=11 format=3 uid="uid://bwm5b0abmd5pj"]
 
 [ext_resource type="Script" path="res://player_character/player_character.gd" id="1_c7fjj"]
 [ext_resource type="Texture2D" uid="uid://b6a2b26ntikeo" path="res://player_character/player_character.png" id="2_h54ty"]
+[ext_resource type="Script" path="res://player_character/marker_2d.gd" id="3_cdsmw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8frko"]
 height = 50.0
@@ -64,7 +65,9 @@ autoplay = "default"
 frame_progress = 0.488412
 
 [node name="Marker2D" type="Marker2D" parent="Sprite"]
+position = Vector2(7.62939e-06, 0)
 scale = Vector2(0.15, 0.2)
+script = ExtResource("3_cdsmw")
 
 [node name="dashTimer" type="Timer" parent="."]
 wait_time = 0.05
