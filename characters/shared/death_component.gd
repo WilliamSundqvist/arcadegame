@@ -13,14 +13,16 @@ func die():
 	# Play cool animation
 	if (animation_player != null):
 		if animation_player.has_animation("death"):
-			animation_player.animation_finished.connect(animation_ended)
+			var death_timer = Timer.new()
+			death_timer.wait_time = 1
+			death_timer.timeout.connect(death_animation_end)
+			add_child(death_timer)
+			death_timer.start()
 			animation_player.play("death")
 		return
 	get_parent().queue_free()
 	pass
 
-func animation_ended(animation_name: StringName):
-	print(animation_name)
-	if animation_name == "death":
-		get_parent().queue_free()
+func death_animation_end():
+	get_parent().queue_free()
 	

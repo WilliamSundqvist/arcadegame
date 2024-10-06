@@ -25,6 +25,7 @@ MusicPlayer="*res://music/music_player.tscn"
 Player="Spelaren"
 Enemies="Alla fiender"
 Projectile=""
+Picksups="Allt du kan plocka upp"
 
 [input]
 
