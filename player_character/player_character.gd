@@ -1,6 +1,6 @@
 extends CharacterBody2D
 class_name PlayerCharacter
-@onready var sprite: Sprite2D = $Sprite
+@onready var sprite: AnimatedSprite2D = $Sprite
 @onready var dashTimer: Timer = $dashTimer
 @onready var fireTimer = $fireTimer
 @onready var projectile = load("res://projectiles/basicProjectile.tscn")
@@ -13,6 +13,7 @@ var state_dash = preload("res://player_character/states/dash.gd").new()
 
 var availableDashes = 3
 var fireRate = 0.1
+var current_velocity = 0
 
 func _ready():
 	change_state(state_moving)
@@ -37,7 +38,9 @@ func change_state(new_state: State):
 func shoot():
 	var level_root = get_parent().get_parent()
 	var effect = blastEffect.instantiate()
-	effect.markerPosition = $Sprite/Marker2D.global_position
+	
+	#Add the current velocity so the blast effect spawns a little infront of the character
+	effect.markerPosition = $Sprite/Marker2D.global_position + current_velocity/3 
 	level_root.add_child(effect)
 	
 	var instance = projectile.instantiate()

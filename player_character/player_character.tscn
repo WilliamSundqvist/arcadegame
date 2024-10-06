@@ -1,22 +1,73 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwm5b0abmd5pj"]
+[gd_scene load_steps=11 format=3 uid="uid://bwm5b0abmd5pj"]
 
 [ext_resource type="Script" path="res://player_character/player_character.gd" id="1_c7fjj"]
-[ext_resource type="Texture2D" uid="uid://djagwe2l6epfp" path="res://icon.svg" id="2_gxu0s"]
+[ext_resource type="Texture2D" uid="uid://b6a2b26ntikeo" path="res://player_character/player_character.png" id="2_h54ty"]
+[ext_resource type="Script" path="res://player_character/marker_2d.gd" id="3_cdsmw"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8frko"]
+height = 50.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7j3f"]
+atlas = ExtResource("2_h54ty")
+region = Rect2(0, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6i20w"]
+atlas = ExtResource("2_h54ty")
+region = Rect2(212, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d8sq1"]
+atlas = ExtResource("2_h54ty")
+region = Rect2(424, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75qyg"]
+atlas = ExtResource("2_h54ty")
+region = Rect2(636, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7fdr"]
+atlas = ExtResource("2_h54ty")
+region = Rect2(848, 0, 212, 212)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mioek"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7j3f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6i20w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d8sq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75qyg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7fdr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="PlayerCharacter" type="CharacterBody2D" groups=["Player"]]
 position = Vector2(548, 304)
 script = ExtResource("1_c7fjj")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="."]
+z_index = 1
 shape = SubResource("CapsuleShape2D_8frko")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.15, 0.2)
-texture = ExtResource("2_gxu0s")
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_mioek")
+autoplay = "default"
+frame_progress = 0.488412
 
 [node name="Marker2D" type="Marker2D" parent="Sprite"]
+position = Vector2(7.62939e-06, 0)
+scale = Vector2(0.15, 0.2)
+script = ExtResource("3_cdsmw")
 
 [node name="dashTimer" type="Timer" parent="."]
 wait_time = 0.05

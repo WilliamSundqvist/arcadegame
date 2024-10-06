@@ -42,6 +42,7 @@ func process(character: PlayerCharacter, delta):
 		velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
 
 	# Move the character based on the calculated velocity
+	character.current_velocity = velocity
 	character.position += velocity * delta
 
 	# Animation handling
