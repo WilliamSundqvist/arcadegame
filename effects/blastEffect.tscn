@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://c5qfep33j55fw"]
 
 [ext_resource type="Script" path="res://effects/blast_effect.gd" id="1_2ubpg"]
-[ext_resource type="Texture2D" uid="uid://2h07wpcf2nex" path="res://projectiles/muzzle_effect.png" id="2_r5ifi"]
+[ext_resource type="Texture2D" uid="uid://2h07wpcf2nex" path="res://spells/basic_projectile/muzzle_effect.png" id="2_r5ifi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lypgs"]
 atlas = ExtResource("2_r5ifi")

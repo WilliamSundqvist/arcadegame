@@ -6,7 +6,7 @@ var dir : Vector2
 var velocity = Vector2.ZERO
 var markerPosition : Vector2
 var targetPosition : Vector2
-@export var damage: int = 1
+@export var damage: int = 30
 
 func _ready():
 	position = markerPosition
@@ -18,8 +18,7 @@ func _process(delta):
 	position += velocity * delta
 
 func _on_area_entered(area):
-	if area.is_in_group("Enemies"):
+	if area.has_method("damage"):
+		area.damage(damage)
 		hide()
-		print("träff")
-	#gör skada eller dylikt
 		queue_free()

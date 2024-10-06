@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cc5owoow82ee2"
-path="res://.godot/imported/devil_cow.png-cc774f7d19a28b2d2e5c9ac0d3506cf1.ctex"
+uid="uid://2h07wpcf2nex"
+path="res://.godot/imported/muzzle_effect.png-170b65668d7602d3150846743494ef6b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://devil_cow/devil_cow.png"
-dest_files=["res://.godot/imported/devil_cow.png-cc774f7d19a28b2d2e5c9ac0d3506cf1.ctex"]
+source_file="res://spells/basic_projectile/muzzle_effect.png"
+dest_files=["res://.godot/imported/muzzle_effect.png-170b65668d7602d3150846743494ef6b.ctex"]
 
 [params]
 
