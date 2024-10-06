@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cw3eubwkhaict"
-path="res://.godot/imported/flame_particle.png-3288d0b0cae84b9689b561ef6083d5d7.ctex"
+uid="uid://cc5owoow82ee2"
+path="res://.godot/imported/devil_cow.png-69509bf02502a2db8dc554e82bf5dd90.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://spells/flame_particle.png"
-dest_files=["res://.godot/imported/flame_particle.png-3288d0b0cae84b9689b561ef6083d5d7.ctex"]
+source_file="res://characters/devil_cow/devil_cow.png"
+dest_files=["res://.godot/imported/devil_cow.png-69509bf02502a2db8dc554e82bf5dd90.ctex"]
 
 [params]
 

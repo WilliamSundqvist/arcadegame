@@ -18,8 +18,7 @@ func _process(delta):
 	position += velocity * delta
 
 func _on_area_entered(area):
-	if area.is_in_group("Enemies"):
+	if area.has_method("damage"):
+		area.damage(damage)
 		hide()
-		print("träff")
-	#gör skada eller dylikt
 		queue_free()

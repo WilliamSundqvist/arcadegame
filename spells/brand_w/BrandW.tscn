@@ -1,9 +1,9 @@
 [gd_scene load_steps=13 format=3 uid="uid://4ug5ffx3rfs3"]
 
-[ext_resource type="Shader" path="res://spells/BrandW.gdshader" id="1_f6lqf"]
-[ext_resource type="Script" path="res://spells/brand_w.gd" id="1_pbc40"]
-[ext_resource type="Texture2D" uid="uid://jjg72unwrfsy" path="res://spells/brandw.png" id="2_k8jeo"]
-[ext_resource type="Texture2D" uid="uid://cw3eubwkhaict" path="res://spells/flame_particle.png" id="4_6eaoo"]
+[ext_resource type="Shader" path="res://spells/brand_w/BrandW.gdshader" id="1_f6lqf"]
+[ext_resource type="Script" path="res://spells/brand_w/brand_w.gd" id="1_pbc40"]
+[ext_resource type="Texture2D" uid="uid://jjg72unwrfsy" path="res://spells/brand_w/brandw.png" id="2_k8jeo"]
+[ext_resource type="Texture2D" uid="uid://cw3eubwkhaict" path="res://spells/brand_w/flame_particle.png" id="4_6eaoo"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kqvw"]
 radius = 40.0
@@ -127,10 +127,3 @@ scale_amount_min = 0.0
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_nnab1")
 color_ramp = SubResource("Gradient_aaob3")
-
-[node name="CastTime" type="Timer" parent="."]
-wait_time = 2.0
-
-[node name="Duration" type="Timer" parent="."]
-
-[connection signal="animation_finished" from="FirstAnimation" to="." method="_on_first_animation_animation_finished"]

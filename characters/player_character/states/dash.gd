@@ -1,6 +1,6 @@
 extends State
 
-@export var dashSpeed: float = 2000.0   # How fast the character accelerates
+@export var dashSpeed: float = 6000.0   # How fast the character accelerates
 
 var mouse_position = null
 var direction = null

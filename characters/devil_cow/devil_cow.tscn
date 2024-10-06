@@ -1,0 +1,237 @@
+[gd_scene load_steps=29 format=3 uid="uid://d0yu8osq6i4ig"]
+
+[ext_resource type="Texture2D" uid="uid://cc5owoow82ee2" path="res://characters/devil_cow/devil_cow.png" id="1_6y1op"]
+[ext_resource type="Script" path="res://characters/devil_cow/devil_cow.gd" id="1_jnh66"]
+[ext_resource type="PackedScene" uid="uid://crwsmb77d2q4l" path="res://characters/shared/hitbox_component.tscn" id="2_cmrix"]
+[ext_resource type="Script" path="res://characters/devil_cow/collision_shape_2d.gd" id="2_hrq67"]
+[ext_resource type="PackedScene" uid="uid://wiejggmqbtd7" path="res://characters/shared/health_component.tscn" id="4_tkues"]
+[ext_resource type="PackedScene" uid="uid://cql5eaodj3xqm" path="res://characters/shared/death_component.tscn" id="5_wttxg"]
+[ext_resource type="Shader" path="res://characters/devil_cow/damage.gdshader" id="6_l0ygl"]
+[ext_resource type="Shader" path="res://characters/devil_cow/death.gdshader" id="6_or3xn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7lx4"]
+radius = 38.6394
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_bscma"]
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w7hh6"]
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_bscma")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5mrn5"]
+frequency = 0.1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rjk55"]
+generate_mipmaps = false
+as_normal_map = true
+noise = SubResource("FastNoiseLite_5mrn5")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sbuds"]
+resource_local_to_scene = true
+shader = ExtResource("6_or3xn")
+shader_parameter/progress = 0.0
+shader_parameter/strength = 0.07
+shader_parameter/noise_tex_normal = SubResource("NoiseTexture2D_rjk55")
+shader_parameter/noise_tex = SubResource("NoiseTexture2D_w7hh6")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdywn"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(0, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcfej"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(212, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xji74"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(424, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x1nhv"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(636, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqhd3"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(848, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ak6m"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(1060, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11vie"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(1272, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sc66n"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(1484, 0, 212, 212)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fop31"]
+atlas = ExtResource("1_6y1op")
+region = Rect2(1696, 0, 212, 212)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uu1jd"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdywn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcfej")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xji74")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x1nhv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqhd3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ak6m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11vie")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sc66n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fop31")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_vfub0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/start")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_or3xn")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:material:shader_parameter/progress")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_0wkly"]
+resource_name = "damage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader_parameter/start")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.4, 0.533333, 0.666667, 0.8),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2),
+"update": 1,
+"values": [0.17, 0.17, 0.2, 0.3, 0.4, 0.7, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_l0ygl")]
+}
+
+[sub_resource type="Animation" id="Animation_mxj0t"]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:material:shader")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_or3xn")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gsdpx"]
+_data = {
+"RESET": SubResource("Animation_vfub0"),
+"damage": SubResource("Animation_0wkly"),
+"death": SubResource("Animation_mxj0t")
+}
+
+[node name="DevilCow" type="Node2D" groups=["Enemies"]]
+script = ExtResource("1_jnh66")
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_cmrix")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(-34, 12)
+shape = SubResource("CircleShape2D_x7lx4")
+script = ExtResource("2_hrq67")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("death_component", "animation_player") instance=ExtResource("4_tkues")]
+death_component = NodePath("../DeathComponent")
+animation_player = NodePath("../AnimationPlayer")
+
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("5_wttxg")]
+animation_player = NodePath("../AnimationPlayer")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_sbuds")
+sprite_frames = SubResource("SpriteFrames_uu1jd")
+autoplay = "default"
+frame_progress = 0.420148
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gsdpx")
+}
