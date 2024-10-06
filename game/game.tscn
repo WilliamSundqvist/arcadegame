@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://byihbnp8mskmt"]
+[gd_scene load_steps=5 format=3 uid="uid://byihbnp8mskmt"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_kv3x3"]
 [ext_resource type="PackedScene" uid="uid://d0yu8osq6i4ig" path="res://devil_cow/devil_cow.tscn" id="3_dni5l"]
 [ext_resource type="PackedScene" uid="uid://bwm5b0abmd5pj" path="res://player_character/player_character.tscn" id="3_vybl6"]
+[ext_resource type="PackedScene" uid="uid://d2143kmd6kbwg" path="res://pickups/dashPoint.tscn" id="4_ko7m5"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_kv3x3")
@@ -18,3 +19,6 @@ text = "Settings"
 position = Vector2(99, 565)
 
 [node name="DevilCow2" parent="." instance=ExtResource("3_dni5l")]
+
+[node name="DashPoint" parent="." instance=ExtResource("4_ko7m5")]
+position = Vector2(831, 322)
