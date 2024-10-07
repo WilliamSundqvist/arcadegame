@@ -56,10 +56,10 @@ func _get_current_url() -> String:
 
 # --- Utility Functions ---
 func _get_token_from_url() -> String:
-	var token = JavaScriptBridge.eval("window.location.hash.substr(1);")
-	if token == null or token == "":
+	var full_url_end = JavaScriptBridge.eval("window.location.hash.substr(1);")
+	if full_url_end == null or full_url_end == "":
 		return ""
-	var token_part = token.split("=")
+	var token_part = full_url_end.split("=")
 	if token_part.size() > 1:
 		return token_part[1]
 	return ""
@@ -69,21 +69,21 @@ func _redirect_to_login() -> void:
 	#OS.shell_open(OAUTH_URL) apparently best way is to use js
 
 # Hash with leaderboard key, user ID, and score for saving highscores
-func generate_score_hash(leaderboard_key: String, user_id: String, score: int) -> String:
-	var to_hash = leaderboard_key.strip_edges() + ":" + user_id.strip_edges() + ":" + str(score).strip_edges()
+func generate_score_hash(leaderboard_key: String, id: String, score: int) -> String:
+	var to_hash = leaderboard_key.strip_edges() + ":" + id.strip_edges() + ":" + str(score).strip_edges()
 	print("String being hashed: ", to_hash)
 
 	var hashing_context = HashingContext.new()
 	hashing_context.start(HashingContext.HASH_SHA256)
 	hashing_context.update(to_hash.to_utf8_buffer())
-	var hash = hashing_context.finish()
+	var res_hash = hashing_context.finish()
 
-	return hash.hex_encode()
+	return res_hash.hex_encode()
 
 # --- Core API Interaction Functions ---
-func _get_current_user_id(token: String) -> void:
+func _get_current_user_id(auth_token: String) -> void:
 	var headers: PackedStringArray = [
-		"x-session-authorization: " + token,
+		"x-session-authorization: " + auth_token,
 		"Content-Type: application/json"
 	]
 
@@ -93,22 +93,22 @@ func _get_current_user_id(token: String) -> void:
 	else:
 		print("Failed to initiate user info request. Error code: ", result)
 
-func _submit_score(token: String, user_id: String, score: int) -> void:
-	print("Submitting score for user ID: ", user_id)
+func _submit_score(auth_token: String, id: String, score: int) -> void:
+	print("Submitting score for user ID: ", id)
 
-	var hash = generate_score_hash(LEADERBOARD_KEY, user_id, score)
-	print("Generated hash: ", hash)
+	var res_hash = generate_score_hash(LEADERBOARD_KEY, id, score)
+	print("Generated hash: ", res_hash)
 
 	var score_data = {
 		"score": score,
-		"hash": hash
+		"hash": res_hash
 	}
 
 	var json_data = JSON.stringify(score_data)
 	print("Score data JSON: ", json_data)
 
 	var headers: PackedStringArray = [
-		"x-session-authorization: " + token,
+		"x-session-authorization: " + auth_token,
 		"Content-Type: application/json"
 	]
 
@@ -119,9 +119,9 @@ func _submit_score(token: String, user_id: String, score: int) -> void:
 	else:
 		print("Failed to initiate score submission. Error code: ", result)
 
-func _get_leaderboard_scores(token: String, limit: int = 25, offset: int = 0) -> void:
+func _get_leaderboard_scores(auth_token: String, limit: int = 25, offset: int = 0) -> void:
 	var headers: PackedStringArray = [
-		"x-session-authorization: " + token,
+		"x-session-authorization: " + auth_token,
 		"Content-Type: application/json"
 	]
 
@@ -136,7 +136,7 @@ func _get_leaderboard_scores(token: String, limit: int = 25, offset: int = 0) ->
 		print("Failed to fetch leaderboard scores. Error code: ", result)
 
 # --- Event Handlers ---
-func _on_request_completed(result, response_code, headers, body):
+func _on_request_completed(_result, response_code, _headers, body):
 	print("Request completed with code: ", response_code)
 	print("Response body: ", body.get_string_from_utf8())
 

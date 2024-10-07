@@ -10,7 +10,7 @@ var dashing = false
 func process(character: PlayerCharacter, delta):
 	if canDash == true and character.availableDashes > 0:
 		mouse_position = character.get_global_mouse_position()
-		var direction = (mouse_position - character.position).normalized()
+		direction = (mouse_position - character.position).normalized()
 		character.position += direction * dashSpeed * delta
 		canDash = false
 		dashing = true

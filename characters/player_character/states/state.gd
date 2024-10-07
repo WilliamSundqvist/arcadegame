@@ -1,11 +1,11 @@
 extends Node
 class_name State
 
-func enter(character: PlayerCharacter):
+func enter(_character: PlayerCharacter):
 	pass
 
-func exit(character: PlayerCharacter):
+func exit(_character: PlayerCharacter):
 	pass
 
-func process(character: PlayerCharacter, delta: float):
+func process(_character: PlayerCharacter, _delta: float):
 	pass

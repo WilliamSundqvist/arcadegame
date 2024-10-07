@@ -10,7 +10,7 @@ func _ready():
 
 func _on_first_animation_animation_finished(_anim_name: StringName) -> void:
 	flaming_pillar.emitting = true
-	
+	damage_over_time_timeout()
 	var damage_over_time_timer = Timer.new()
 	add_child(damage_over_time_timer)
 	damage_over_time_timer.wait_time = damage_interval
