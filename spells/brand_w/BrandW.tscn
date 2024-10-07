@@ -15,7 +15,7 @@ shader_parameter/force = -0.5
 
 [sub_resource type="Animation" id="Animation_dis1w"]
 resource_name = "BeginAnimation"
-length = 2.0
+length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -23,7 +23,7 @@ tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(-2, -2),
 "update": 0,
 "values": [Vector2(0.1, 0.1), Vector2(0.8, 0.8)]
@@ -35,10 +35,10 @@ tracks/1/path = NodePath("Sprite2D:material:shader_parameter/force")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.6, 1, 1.33333, 1.76667, 2),
-"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2),
+"times": PackedFloat32Array(0, 0.2, 0.466667, 0.8),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
 "update": 0,
-"values": [-0.5, 0.0, -0.29, -0.075, -0.415, 0.02]
+"values": [-0.5, 0.0, -0.415, 0.02]
 }
 
 [sub_resource type="Animation" id="Animation_q07sl"]

@@ -9,6 +9,6 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	dir = ( get_global_mouse_position() - player.position).normalized()
 	position = dir * radius

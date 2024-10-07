@@ -46,7 +46,7 @@ func shoot():
 	var effect = blastEffect.instantiate()
 	
 	#Add the current velocity so the blast effect spawns a little infront of the character
-	effect.markerPosition = $Sprite/Marker2D.global_position + current_velocity/3 
+	effect.markerPosition = $Sprite/Marker2D.global_position + current_velocity/3.0 
 	level_root.add_child(effect)
 	
 	var instance = projectile.instantiate()

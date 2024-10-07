@@ -3,18 +3,18 @@ extends State
 @export var acceleration: float = 1000.0   # How fast the character accelerates
 @export var deceleration: float = 500.0    # How fast the character decelerates
 @export var max_speed: float = 200.0       # Maximum speed when running
-@export var walk_speed: float = 100.0      # Speed when walking
 @export var run_speed: float = 200.0       # Speed when sprinting
 
 var velocity = Vector2.ZERO
 
 func process(character: PlayerCharacter, delta):
 	var input_vector = Vector2.ZERO
-	var move_speed = walk_speed  # Default to walking speed
+	var move_speed = run_speed  # Default to walking speed
 
 	# Handle sprinting (running)
-	if Input.is_action_pressed("sprint"):
-		move_speed = run_speed
+	#if Input.is_action_pressed("sprint"):
+	#	move_speed = run_speed
+	# Always sprint, why not
 	if Input.is_action_just_pressed("dash"):
 		character.change_state(character.state_dash)
 	# Collect input for WASD movement

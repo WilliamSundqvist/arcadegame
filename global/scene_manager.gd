@@ -12,7 +12,7 @@ func change_scene(new_scene_path: String):
 	var new_scene = load(new_scene_path).instantiate()
 	get_tree().root.add_child(new_scene)
 	current_scene = new_scene
-
+ 
 #Restart current scene
 func restart_scene():
 	if current_scene:

@@ -7,11 +7,6 @@ func _ready() -> void:
 	settings_button.pressed.connect(_settings_button_pressed)
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
 func _settings_button_pressed():
 	var settings_scene = SETTINGS.instantiate()
 	add_child(settings_scene)
