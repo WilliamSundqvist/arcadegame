@@ -15,6 +15,7 @@ func _ready() -> void:
 func die():
 	if death_in_progress:
 		return
+	get_parent().cow_speed = 10
 	death_in_progress = true
 	if (score_component):
 		score_component.death()

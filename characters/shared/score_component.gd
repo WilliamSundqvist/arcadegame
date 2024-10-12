@@ -33,7 +33,7 @@ func took_damage(damage: float):
 		combo += 1
 
 	# Check if it's a one-shot based on the short damage window
-	if Time.get_ticks_msec() / 1000.0 - first_damage_time < 0.3:
+	if Time.get_ticks_msec() / 1000.0 - first_damage_time < 0.2:
 		one_shot = true
 
 # Timer expired, no longer one-shot
