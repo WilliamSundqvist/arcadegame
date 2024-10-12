@@ -6,9 +6,9 @@
 [ext_resource type="Script" path="res://characters/devil_cow/collision_shape_2d.gd" id="2_hrq67"]
 [ext_resource type="PackedScene" uid="uid://wiejggmqbtd7" path="res://characters/shared/health_component.tscn" id="4_tkues"]
 [ext_resource type="PackedScene" uid="uid://cql5eaodj3xqm" path="res://characters/shared/death_component.tscn" id="5_wttxg"]
+[ext_resource type="Script" path="res://characters/shared/score_component.gd" id="6_4uw6c"]
 [ext_resource type="Shader" path="res://characters/devil_cow/damage.gdshader" id="6_l0ygl"]
 [ext_resource type="Shader" path="res://characters/devil_cow/death.gdshader" id="6_or3xn"]
-[ext_resource type="PackedScene" uid="uid://cuyhl42vjjrqh" path="res://characters/shared/score_component.tscn" id="6_t5gx2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x7lx4"]
 radius = 38.6394
@@ -219,16 +219,16 @@ position = Vector2(-34, 12)
 shape = SubResource("CircleShape2D_x7lx4")
 script = ExtResource("2_hrq67")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("death_component", "animation_player", "score_component") instance=ExtResource("4_tkues")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("death_component", "animation_player") instance=ExtResource("4_tkues")]
 death_component = NodePath("../DeathComponent")
 animation_player = NodePath("../AnimationPlayer")
-score_component = NodePath("../ScoreComponent")
 
-[node name="DeathComponent" parent="." node_paths=PackedStringArray("animation_player", "score_component") instance=ExtResource("5_wttxg")]
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("5_wttxg")]
 animation_player = NodePath("../AnimationPlayer")
-score_component = NodePath("../ScoreComponent")
+score = null
 
-[node name="ScoreComponent" parent="." instance=ExtResource("6_t5gx2")]
+[node name="ScoreComponent" type="Node2D" parent="."]
+script = ExtResource("6_4uw6c")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_sbuds")

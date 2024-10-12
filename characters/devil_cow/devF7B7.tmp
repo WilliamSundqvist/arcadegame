@@ -219,14 +219,13 @@ position = Vector2(-34, 12)
 shape = SubResource("CircleShape2D_x7lx4")
 script = ExtResource("2_hrq67")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("death_component", "animation_player", "score_component") instance=ExtResource("4_tkues")]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("death_component", "animation_player") instance=ExtResource("4_tkues")]
 death_component = NodePath("../DeathComponent")
 animation_player = NodePath("../AnimationPlayer")
-score_component = NodePath("../ScoreComponent")
 
-[node name="DeathComponent" parent="." node_paths=PackedStringArray("animation_player", "score_component") instance=ExtResource("5_wttxg")]
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("animation_player") instance=ExtResource("5_wttxg")]
 animation_player = NodePath("../AnimationPlayer")
-score_component = NodePath("../ScoreComponent")
+score = null
 
 [node name="ScoreComponent" parent="." instance=ExtResource("6_t5gx2")]
 
