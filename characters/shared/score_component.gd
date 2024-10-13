@@ -2,7 +2,7 @@ extends Node2D
 class_name ScoreComponent
 
 @export var base_score = 100  # Base score of the enemy
-@export var time = 0.2  # Time window for one-shot detection
+@export var time = 0.3  # Time window for one-shot detection
 const SCORE_POP_UP = preload("res://characters/shared/score_pop_up.tscn")
 
 # New variables to handle popup positioning over time

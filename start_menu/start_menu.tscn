@@ -23,11 +23,6 @@ text = "Play game"
 layout_mode = 2
 text = "Log in (for highscores)"
 
-[node name="SubmitHighscoreButton" type="Button" parent="CenterContainer/VBoxContainer"]
-visible = false
-layout_mode = 2
-text = "Submit new 5p highscore"
-
 [node name="LeaderboardButton" type="Button" parent="CenterContainer/VBoxContainer"]
 visible = false
 layout_mode = 2

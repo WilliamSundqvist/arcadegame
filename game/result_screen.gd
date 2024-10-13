@@ -1,11 +1,14 @@
-extends Node2D
+extends Panel
 
 # --- Constants and Variables ---
 @onready var http_request: HTTPRequest = $HTTPRequest
-@onready var play_game_button: Button = $CenterContainer/VBoxContainer/PlayGameButton
-@onready var leaderboard_button: Button = $CenterContainer/VBoxContainer/LeaderboardButton
-@onready var score_container: VBoxContainer = $CenterContainer/VBoxContainer/ScrollContainer/ScoreContainer
-@onready var login_button: Button = $CenterContainer/VBoxContainer/LoginButton
+@onready var score_container: VBoxContainer = $ScoreContainer
+@onready var error_label: Label = $ScoreContainer/ErrorLabel
+@onready var login_button: Button = $LoginButton
+@onready var play_again_button: Button = $PlayAgainButton
+
+@onready var points: Label = $VBoxContainer/Points
+
 
 const APP_ID = "525f4753-8c75-4516-8b21-050d42f0c514"
 const LEADERBOARD_ID = "b3a4adfd-ffe1-4c48-b259-6b88e4a30092"
@@ -16,14 +19,16 @@ var user_id = ""
 var oauth_url = "https://hyplay.com/oauth/authorize/?appId=525f4753-8c75-4516-8b21-050d42f0c514&chain=HYCHAIN_TESTNET&responseType=token&redirectUri="
 var app_url = "http://localhost:8080/ArcadeGame.html"
 
+var score = 0
+
 # --- Initialization and Setup ---
 func _ready() -> void:
-	# Connect signals
-	play_game_button.connect("pressed", _on_play_button_pressed)
-	leaderboard_button.connect("pressed", _on_leaderboard_button_pressed)
-	login_button.connect("pressed", _on_login_button_pressed)
 	
+	points.text = str(score)+"!"
+	# Connect signals
 	http_request.request_completed.connect(_on_request_completed)
+	login_button.pressed.connect(_on_login_button_pressed)
+	play_again_button.pressed.connect(on_play_again_button_pressed)
 	
 	app_url = _get_current_url()
 	token = _get_token_from_url() # Looks for auth token in the end of URL, will be empty on first load
@@ -31,14 +36,15 @@ func _ready() -> void:
 	print("Test")
 	# Set up button visibility based on token availability
 	if token == "":
+		error_label.visible = true
 		login_button.visible = true
-		leaderboard_button.visible = false
+		login_button.disabled = false
 		return
-		
+	error_label.visible = false
 	login_button.visible = false
-	leaderboard_button.visible = true
 	print("Access token found, fetching user ID...")
 	_get_current_user_id(token)
+	
 
 
 
@@ -89,6 +95,32 @@ func _get_current_user_id(auth_token: String) -> void:
 	else:
 		print("Failed to initiate user info request. Error code: ", result)
 
+func _submit_score(auth_token: String, id: String, score: int) -> void:
+	print("Submitting score for user ID: ", id)
+
+	var res_hash = generate_score_hash(LEADERBOARD_KEY, id, score)
+	print("Generated hash: ", res_hash)
+
+	var score_data = {
+		"score": score,
+		"hash": res_hash
+	}
+
+	var json_data = JSON.stringify(score_data)
+	print("Score data JSON: ", json_data)
+
+	var headers: PackedStringArray = [
+		"x-session-authorization: " + auth_token,
+		"Content-Type: application/json"
+	]
+
+	var result = http_request.request("https://api.hyplay.com/v1/apps/" + APP_ID + "/leaderboards/" + LEADERBOARD_ID + "/scores", headers, HTTPClient.METHOD_POST, json_data)
+
+	if result == OK:
+		print("Score submission initiated...")
+	else:
+		print("Failed to initiate score submission. Error code: ", result)
+
 func _get_leaderboard_scores(auth_token: String, limit: int = 25, offset: int = 0) -> void:
 	var headers: PackedStringArray = [
 		"x-session-authorization: " + auth_token,
@@ -117,10 +149,11 @@ func _on_request_completed(_result, response_code, _headers, body):
 			# Handle user info request completion
 			if json.has("id"):
 				user_id = json["id"]
-				print("User ID: ", user_id)
+				_submit_score(token, user_id, score)
 			# Handle score submission response (I think this one isnt working right now, we get error on score submission
-			else:
-				print("Score successfully submitted: ", json)
+		elif json.has("score"):
+			_get_leaderboard_scores(token, 25, 0)
+			print("Score successfully submitted: ", json)
 		elif json.has("scores"):
 			#Handle leaderboard request completion
 			print("Leaderboard scores: ")
@@ -136,24 +169,17 @@ func _on_request_completed(_result, response_code, _headers, body):
 		print("Unauthorized: Invalid or expired session token.")
 	else:
 		print("Unexpected response code: ", response_code)
-
-func _on_play_button_pressed() -> void:
-	SceneManager.change_scene(GAME_SCENE_PATH)
 		
-func _on_leaderboard_button_pressed() -> void:
-	# Clear leaderboard
-	for child in score_container.get_children():
-		score_container.remove_child(child)
-	if token != "":
-		_get_leaderboard_scores(token, 25, 0)  # Fetch top 25 scores
-	else:
-		print("Access token not available. Cannot fetch leaderboard.")
-
 func _on_login_button_pressed() -> void:
 	_redirect_to_login()
+
+func on_play_again_button_pressed() -> void:
+	ScoreManager.current_score = 0
+	SceneManager.restart_scene()
 
 # --- Leaderboard UI Update ---
 func add_score(username: String, score: float):
 	var label = Label.new()
+	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.text = username + "-" + str(score)
 	score_container.add_child(label)

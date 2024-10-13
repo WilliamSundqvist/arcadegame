@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://cpml1p2hv5mba"]
+
+[ext_resource type="FontFile" uid="uid://2ib57q2lowff" path="res://characters/shared/Sixtyfour-Regular-VariableFont_BLED,SCAN.ttf" id="1_h282c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rbndq"]
+bg_color = Color(0.466667, 0.85098, 0.835294, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.262745, 0.407843, 0.47451, 1)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0d6nr"]
+bg_color = Color(0.176471, 0.278431, 0.368627, 1)
+border_width_left = 10
+border_width_top = 10
+border_width_right = 10
+border_width_bottom = 10
+border_color = Color(0.12549, 0.196078, 0.258824, 1)
+border_blend = true
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[resource]
+default_font = ExtResource("1_h282c")
+Button/styles/normal = SubResource("StyleBoxFlat_rbndq")
+Panel/styles/panel = SubResource("StyleBoxFlat_0d6nr")
+VBoxContainer/constants/separation = 18

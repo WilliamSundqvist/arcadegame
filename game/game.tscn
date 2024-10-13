@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://byihbnp8mskmt"]
+[gd_scene load_steps=12 format=4 uid="uid://byihbnp8mskmt"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_kv3x3"]
 [ext_resource type="PackedScene" uid="uid://d0yu8osq6i4ig" path="res://characters/devil_cow/devil_cow.tscn" id="3_dni5l"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bco8kyr55ayok" path="res://map/Tileset_1.png" id="5_t4qps"]
 [ext_resource type="Texture2D" uid="uid://bh6q3cb5ohmfj" path="res://pickups/dashpower.png" id="6_kpqbi"]
 [ext_resource type="FontFile" uid="uid://2ib57q2lowff" path="res://characters/shared/Sixtyfour-Regular-VariableFont_BLED,SCAN.ttf" id="7_shjau"]
+[ext_resource type="Script" path="res://game/time.gd" id="8_kxj55"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trhmw"]
 texture = ExtResource("5_t4qps")
@@ -95,7 +96,7 @@ texture = ExtResource("6_kpqbi")
 [node name="Score" type="Label" parent="."]
 z_index = 10
 custom_minimum_size = Vector2(500, 0)
-offset_left = 81.0
+offset_left = 193.0
 offset_top = 2.0
 offset_right = 1151.0
 offset_bottom = 66.0
@@ -104,8 +105,24 @@ label_settings = SubResource("LabelSettings_0yb88")
 horizontal_alignment = 2
 vertical_alignment = 1
 
+[node name="Time" type="Label" parent="."]
+z_index = 10
+offset_left = 81.0
+offset_top = 2.0
+offset_right = 185.0
+offset_bottom = 66.0
+text = "60"
+label_settings = SubResource("LabelSettings_0yb88")
+vertical_alignment = 1
+script = ExtResource("8_kxj55")
+
+[node name="Timer" type="Timer" parent="Time"]
+wait_time = 60.0
+one_shot = true
+
 [node name="cowSpawner" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
 
+[connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]
 [connection signal="timeout" from="cowSpawner" to="." method="_on_cow_spawner_timeout"]

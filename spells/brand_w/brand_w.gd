@@ -1,7 +1,7 @@
 extends Area2D
 @onready var first_animation: AnimationPlayer = $FirstAnimation
 @onready var flaming_pillar: CPUParticles2D = $FlamingPillar
-@export var damage: int = 10
+@export var damage: int = 20
 @export var damage_interval: float = 0.2
 
 func _ready():

@@ -7,9 +7,10 @@ class_name PlayerCharacter
 @onready var e_timer: Timer = $ETimer
 
 @onready var projectile = load("res://spells/basic_projectile/basicProjectile.tscn")
+@onready var blastEffect = load("res://effects/blastEffect.tscn")
 @onready var brand_w = load("res://spells/brand_w/BrandW.tscn")
 @onready var lux_r = load("res://spells/lux_r/lux_r.tscn")
-@onready var blastEffect = load("res://effects/blastEffect.tscn")
+
 
 var current_state: State = null
 var state_moving = preload("res://characters/player_character/states/moving.gd").new()
@@ -17,7 +18,7 @@ var state_idle = preload("res://characters/player_character/states/idle.gd").new
 var state_dash = preload("res://characters/player_character/states/dash.gd").new()
 
 var availableDashes = 3
-var fireRate = 0.1
+var fireRate = 0.5
 var q_fire_rate = 2
 var e_fire_rate = 4
 var current_velocity = 0
