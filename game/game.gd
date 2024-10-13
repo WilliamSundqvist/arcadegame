@@ -18,7 +18,7 @@ func _settings_button_pressed():
 
 func _on_cow_spawner_timeout():
 	var cowEnemy = cow.instantiate()
-	if(cowAlternator%2 == 0):
+	if cowAlternator:
 		cowEnemy.position = Vector2(randf_range(-20, 1000), -20)
 	else:
 		cowEnemy.position = Vector2(randf_range(-20, 1000), 1000)

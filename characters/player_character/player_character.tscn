@@ -80,3 +80,7 @@ one_shot = true
 [node name="QTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="ETimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
