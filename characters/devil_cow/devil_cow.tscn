@@ -224,9 +224,10 @@ death_component = NodePath("../DeathComponent")
 animation_player = NodePath("../AnimationPlayer")
 score_component = NodePath("../ScoreComponent")
 
-[node name="DeathComponent" parent="." node_paths=PackedStringArray("animation_player", "score_component") instance=ExtResource("5_wttxg")]
+[node name="DeathComponent" parent="." node_paths=PackedStringArray("animation_player", "score_component", "hitbox_component") instance=ExtResource("5_wttxg")]
 animation_player = NodePath("../AnimationPlayer")
 score_component = NodePath("../ScoreComponent")
+hitbox_component = NodePath("../HitboxComponent")
 
 [node name="ScoreComponent" parent="." instance=ExtResource("6_t5gx2")]
 

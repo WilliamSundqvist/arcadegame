@@ -4,7 +4,7 @@ class_name DeathComponent
 @export var animation_player: AnimationPlayer
 @export var score:= 100
 @export var score_component: ScoreComponent
-
+@export var hitbox_component: HitboxComponent
 var death_in_progress = false
 
 # Called when the node enters the scene tree for the first time.
@@ -15,6 +15,7 @@ func _ready() -> void:
 func die():
 	if death_in_progress:
 		return
+	hitbox_component.disable_collision()
 	get_parent().cow_speed = 10
 	death_in_progress = true
 	if (score_component):

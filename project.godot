@@ -21,6 +21,10 @@ SceneManager="*res://global/scene_manager.gd"
 MusicPlayer="*res://music/music_player.tscn"
 ScoreManager="*res://global/score_manager.tscn"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/fluff/Videos/ArcadeGame.avi"
+
 [global_group]
 
 Player="Spelaren"
