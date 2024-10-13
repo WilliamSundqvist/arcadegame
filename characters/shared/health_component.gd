@@ -4,6 +4,7 @@ class_name HealthComponent
 @export var MAX_HEALTH := 100.0
 @export var death_component: DeathComponent
 @export var animation_player: AnimationPlayer
+@export var score_component: ScoreComponent
 
 var health: float
 
@@ -14,10 +15,13 @@ func _ready() -> void:
 
 func damage(number: float):
 	health -= number
-	if animation_player != null:
-		if animation_player.has_animation("damage"):
-			animation_player.play("damage")
+	if score_component != null:
+		score_component.took_damage(number)
 	if health <= 0:
 		if death_component != null:
 			death_component.die()
+			return
+	if animation_player != null:
+		if animation_player.has_animation("damage"):
+			animation_player.play("damage")
 	

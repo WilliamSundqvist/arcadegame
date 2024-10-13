@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://byihbnp8mskmt"]
+[gd_scene load_steps=11 format=4 uid="uid://byihbnp8mskmt"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_kv3x3"]
 [ext_resource type="PackedScene" uid="uid://d0yu8osq6i4ig" path="res://characters/devil_cow/devil_cow.tscn" id="3_dni5l"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d2143kmd6kbwg" path="res://pickups/dashPoint.tscn" id="4_ko7m5"]
 [ext_resource type="Texture2D" uid="uid://bco8kyr55ayok" path="res://map/Tileset_1.png" id="5_t4qps"]
 [ext_resource type="Texture2D" uid="uid://bh6q3cb5ohmfj" path="res://pickups/dashpower.png" id="6_kpqbi"]
+[ext_resource type="FontFile" uid="uid://2ib57q2lowff" path="res://characters/shared/Sixtyfour-Regular-VariableFont_BLED,SCAN.ttf" id="7_shjau"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_trhmw"]
 texture = ExtResource("5_t4qps")
@@ -52,6 +53,11 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_trhmw")
 
+[sub_resource type="LabelSettings" id="LabelSettings_0yb88"]
+font = ExtResource("7_shjau")
+font_size = 52
+font_color = Color(0.913725, 0.945098, 0.94902, 1)
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_kv3x3")
 
@@ -86,6 +92,17 @@ position = Vector2(159, 157)
 position = Vector2(3, 0)
 texture = ExtResource("6_kpqbi")
 
+[node name="Score" type="Label" parent="."]
+z_index = 10
+custom_minimum_size = Vector2(500, 0)
+offset_left = 81.0
+offset_top = 2.0
+offset_right = 1151.0
+offset_bottom = 66.0
+text = "0"
+label_settings = SubResource("LabelSettings_0yb88")
+horizontal_alignment = 2
+vertical_alignment = 1
 [node name="cowSpawner" type="Timer" parent="."]
 autostart = true
 
