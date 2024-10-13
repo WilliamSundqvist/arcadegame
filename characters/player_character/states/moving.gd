@@ -10,6 +10,8 @@ var velocity = Vector2.ZERO
 func process(character: PlayerCharacter, delta):
 	var input_vector = Vector2.ZERO
 	var move_speed = run_speed  # Default to walking speed
+	if (character.is_casting_spell):
+		return
 
 	# Handle sprinting (running)
 	#if Input.is_action_pressed("sprint"):
