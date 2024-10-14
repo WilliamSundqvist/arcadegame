@@ -15,6 +15,12 @@ offset_bottom = 648.0
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "WASD to move.
+Left click, Q, E and SPACE for abilities.
+Try to oneshot multiple enemies for the highest score!"
+
 [node name="PlayGameButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Play game"

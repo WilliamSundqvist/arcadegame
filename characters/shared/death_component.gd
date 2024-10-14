@@ -1,6 +1,8 @@
 extends Node2D
 class_name DeathComponent
 
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
+
 @export var animation_player: AnimationPlayer
 @export var score:= 100
 @export var score_component: ScoreComponent
@@ -13,6 +15,7 @@ func _ready() -> void:
 
 
 func die():
+	audio_stream_player.play()
 	if death_in_progress:
 		return
 	hitbox_component.disable_collision()

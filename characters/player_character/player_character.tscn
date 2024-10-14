@@ -84,3 +84,7 @@ one_shot = true
 [node name="ETimer" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
+
+[connection signal="timeout" from="fireTimer" to="." method="_on_fire_timer_timeout"]
+[connection signal="timeout" from="QTimer" to="." method="_on_q_timer_timeout"]
+[connection signal="timeout" from="ETimer" to="." method="_on_e_timer_timeout"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://ooaw6u2o2be5"]
+[gd_scene load_steps=23 format=3 uid="uid://ooaw6u2o2be5"]
 
 [ext_resource type="Texture2D" uid="uid://c4n3kmog1bko" path="res://spells/lux_r/lux-r-sheet.png" id="1_ab71q"]
 [ext_resource type="Script" path="res://spells/lux_r/lux_r.gd" id="1_gam13"]
+[ext_resource type="AudioStream" uid="uid://cbsqf2ibrt6lx" path="res://spells/lux_r/charge_up.wav" id="3_hanxw"]
+[ext_resource type="AudioStream" uid="uid://qiq6a1vra2oc" path="res://spells/lux_r/blast.wav" id="4_0dguu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_408o2"]
 size = Vector2(600, 40)
@@ -151,3 +153,13 @@ frame = 3
 frame_progress = 0.570767
 centered = false
 offset = Vector2(0, -20)
+
+[node name="ChargePlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_hanxw")
+volume_db = -5.0
+bus = &"sfx"
+
+[node name="BlastPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0dguu")
+volume_db = -10.0
+bus = &"sfx"

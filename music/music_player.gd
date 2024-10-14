@@ -1,16 +1,15 @@
 extends AudioStreamPlayer
 
-#const music = preload("res://music/INSERT MUSIC HERE.wav") #enable this when we have music
+const music = preload("res://music/bouncybrew.wav") #enable this when we have music
 #In the musicplayernode settings the Music Bus is chosen (For changing music volume)
 
 func _ready() -> void:
-	print("Music ready")
-	#play_music(music)
+	_play_music(music)
 
-func _play_music(music: AudioStream, volume = 0.0):
-	if stream == music:
+func _play_music(new_music: AudioStream, volume = 0.0):
+	if stream == new_music:
 		return
-	stream = music
+	stream = new_music
 	volume_db = volume
 	play()
 

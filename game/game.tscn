@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=4 uid="uid://byihbnp8mskmt"]
+[gd_scene load_steps=13 format=4 uid="uid://byihbnp8mskmt"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_kv3x3"]
 [ext_resource type="PackedScene" uid="uid://d0yu8osq6i4ig" path="res://characters/devil_cow/devil_cow.tscn" id="3_dni5l"]
@@ -59,6 +59,10 @@ font = ExtResource("7_shjau")
 font_size = 52
 font_color = Color(0.913725, 0.945098, 0.94902, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_7rn17"]
+font = ExtResource("7_shjau")
+font_size = 20
+
 [node name="Game" type="Node2D"]
 script = ExtResource("1_kv3x3")
 
@@ -72,7 +76,11 @@ offset_right = 70.0
 offset_bottom = 31.0
 text = "Settings"
 
-[node name="PlayerCharacter" parent="." instance=ExtResource("3_vybl6")]
+[node name="PlayerCharacter" parent="." node_paths=PackedStringArray("m1_label", "q_label", "e_label", "dash_label") instance=ExtResource("3_vybl6")]
+m1_label = NodePath("../M1")
+q_label = NodePath("../Q")
+e_label = NodePath("../E")
+dash_label = NodePath("../Space")
 
 [node name="DevilCow" parent="." instance=ExtResource("3_dni5l")]
 position = Vector2(99, 565)
@@ -123,6 +131,38 @@ one_shot = true
 [node name="cowSpawner" type="Timer" parent="."]
 wait_time = 5.0
 autostart = true
+
+[node name="M1" type="Label" parent="."]
+offset_left = 422.0
+offset_top = 21.0
+offset_right = 462.0
+offset_bottom = 44.0
+text = "M1"
+label_settings = SubResource("LabelSettings_7rn17")
+
+[node name="Q" type="Label" parent="."]
+offset_left = 481.0
+offset_top = 22.0
+offset_right = 521.0
+offset_bottom = 45.0
+text = "Q"
+label_settings = SubResource("LabelSettings_7rn17")
+
+[node name="E" type="Label" parent="."]
+offset_left = 532.0
+offset_top = 24.0
+offset_right = 572.0
+offset_bottom = 47.0
+text = "E"
+label_settings = SubResource("LabelSettings_7rn17")
+
+[node name="Space" type="Label" parent="."]
+offset_left = 570.0
+offset_top = 23.0
+offset_right = 610.0
+offset_bottom = 46.0
+text = "_"
+label_settings = SubResource("LabelSettings_7rn17")
 
 [connection signal="timeout" from="Time/Timer" to="Time" method="_on_timer_timeout"]
 [connection signal="timeout" from="cowSpawner" to="." method="_on_cow_spawner_timeout"]

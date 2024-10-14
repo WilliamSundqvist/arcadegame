@@ -32,8 +32,6 @@ func _ready() -> void:
 	
 	app_url = _get_current_url()
 	token = _get_token_from_url() # Looks for auth token in the end of URL, will be empty on first load
-	print("Access token: ", token)
-	print("Test")
 	# Set up button visibility based on token availability
 	if token == "":
 		error_label.visible = true
@@ -42,7 +40,6 @@ func _ready() -> void:
 		return
 	error_label.visible = false
 	login_button.visible = false
-	print("Access token found, fetching user ID...")
 	_get_current_user_id(token)
 	
 
@@ -53,7 +50,6 @@ func _get_current_url() -> String:
 	var current_url = JavaScriptBridge.eval("window.location.href;")
 	if !current_url:
 		return ""
-	print(current_url)
 	return current_url
 
 # --- Utility Functions ---
@@ -73,7 +69,6 @@ func _redirect_to_login() -> void:
 # Hash with leaderboard key, user ID, and score for saving highscores
 func generate_score_hash(leaderboard_key: String, id: String, score: int) -> String:
 	var to_hash = leaderboard_key.strip_edges() + ":" + id.strip_edges() + ":" + str(score).strip_edges()
-	print("String being hashed: ", to_hash)
 
 	var hashing_context = HashingContext.new()
 	hashing_context.start(HashingContext.HASH_SHA256)
@@ -90,16 +85,10 @@ func _get_current_user_id(auth_token: String) -> void:
 	]
 
 	var result = http_request.request("https://api.hyplay.com/v1/users/me", headers, HTTPClient.METHOD_GET)
-	if result == OK:
-		print("Fetching user info...")
-	else:
-		print("Failed to initiate user info request. Error code: ", result)
 
 func _submit_score(auth_token: String, id: String, score: int) -> void:
-	print("Submitting score for user ID: ", id)
 
 	var res_hash = generate_score_hash(LEADERBOARD_KEY, id, score)
-	print("Generated hash: ", res_hash)
 
 	var score_data = {
 		"score": score,
@@ -107,7 +96,6 @@ func _submit_score(auth_token: String, id: String, score: int) -> void:
 	}
 
 	var json_data = JSON.stringify(score_data)
-	print("Score data JSON: ", json_data)
 
 	var headers: PackedStringArray = [
 		"x-session-authorization: " + auth_token,
@@ -115,11 +103,6 @@ func _submit_score(auth_token: String, id: String, score: int) -> void:
 	]
 
 	var result = http_request.request("https://api.hyplay.com/v1/apps/" + APP_ID + "/leaderboards/" + LEADERBOARD_ID + "/scores", headers, HTTPClient.METHOD_POST, json_data)
-
-	if result == OK:
-		print("Score submission initiated...")
-	else:
-		print("Failed to initiate score submission. Error code: ", result)
 
 func _get_leaderboard_scores(auth_token: String, limit: int = 25, offset: int = 0) -> void:
 	var headers: PackedStringArray = [
@@ -132,19 +115,11 @@ func _get_leaderboard_scores(auth_token: String, limit: int = 25, offset: int = 
 
 	var result = http_request.request(url, headers, HTTPClient.METHOD_GET)
 
-	if result == OK:
-		print("Fetching leaderboard scores...")
-	else:
-		print("Failed to fetch leaderboard scores. Error code: ", result)
-
 # --- Event Handlers ---
 func _on_request_completed(_result, response_code, _headers, body):
-	print("Request completed with code: ", response_code)
-	print("Response body: ", body.get_string_from_utf8())
 
 	if response_code == 200:
 		var json = JSON.parse_string(body.get_string_from_utf8())
-		print(json)
 		if json.has("username"):
 			# Handle user info request completion
 			if json.has("id"):
@@ -153,15 +128,10 @@ func _on_request_completed(_result, response_code, _headers, body):
 			# Handle score submission response (I think this one isnt working right now, we get error on score submission
 		elif json.has("score"):
 			_get_leaderboard_scores(token, 25, 0)
-			print("Score successfully submitted: ", json)
 		elif json.has("scores"):
 			#Handle leaderboard request completion
-			print("Leaderboard scores: ")
 			for score in json["scores"]:
-				print("Username: ", score["username"], " - Score: ", score["score"])
 				add_score(score["username"], score["score"])
-		else:
-			print("Error parsing JSON response: ", json)
 
 	elif response_code == 400:
 		print("Bad Request: Check the data being sent.")
@@ -174,6 +144,7 @@ func _on_login_button_pressed() -> void:
 	_redirect_to_login()
 
 func on_play_again_button_pressed() -> void:
+	get_tree().paused = false
 	ScoreManager.current_score = 0
 	SceneManager.restart_scene()
 

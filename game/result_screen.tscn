@@ -9,6 +9,7 @@ font = ExtResource("2_r3v7c")
 font_size = 64
 
 [node name="ResultScreen" type="Panel"]
+process_mode = 3
 offset_left = 65.0
 offset_top = 65.0
 offset_right = 1150.0

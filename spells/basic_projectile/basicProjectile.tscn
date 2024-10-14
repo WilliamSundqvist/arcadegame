@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bbkwq3xwgxh08"]
+[gd_scene load_steps=10 format=3 uid="uid://bbkwq3xwgxh08"]
 
 [ext_resource type="Script" path="res://spells/basic_projectile/basic_projectile.gd" id="1_0fro3"]
 [ext_resource type="Texture2D" uid="uid://dkedir03wt281" path="res://spells/basic_projectile/energy_projectile_1.png" id="2_qaqp0"]
+[ext_resource type="AudioStream" uid="uid://bljy221he84v7" path="res://spells/basic_projectile/basic_projectile.wav" id="3_w6vwg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_125je"]
 atlas = ExtResource("2_qaqp0")
@@ -56,6 +57,10 @@ frame_progress = 0.0694527
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.25, 0.25)
 shape = SubResource("RectangleShape2D_wi53v")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_w6vwg")
+bus = &"sfx"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

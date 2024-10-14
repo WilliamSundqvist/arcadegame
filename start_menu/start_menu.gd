@@ -27,8 +27,6 @@ func _ready() -> void:
 	
 	app_url = _get_current_url()
 	token = _get_token_from_url() # Looks for auth token in the end of URL, will be empty on first load
-	print("Access token: ", token)
-	print("Test")
 	# Set up button visibility based on token availability
 	if token == "":
 		login_button.visible = true
@@ -37,7 +35,6 @@ func _ready() -> void:
 		
 	login_button.visible = false
 	leaderboard_button.visible = true
-	print("Access token found, fetching user ID...")
 	_get_current_user_id(token)
 
 
@@ -47,7 +44,6 @@ func _get_current_url() -> String:
 	var current_url = JavaScriptBridge.eval("window.location.href;")
 	if !current_url:
 		return ""
-	print(current_url)
 	return current_url
 
 # --- Utility Functions ---
@@ -67,7 +63,6 @@ func _redirect_to_login() -> void:
 # Hash with leaderboard key, user ID, and score for saving highscores
 func generate_score_hash(leaderboard_key: String, id: String, score: int) -> String:
 	var to_hash = leaderboard_key.strip_edges() + ":" + id.strip_edges() + ":" + str(score).strip_edges()
-	print("String being hashed: ", to_hash)
 
 	var hashing_context = HashingContext.new()
 	hashing_context.start(HashingContext.HASH_SHA256)
@@ -84,10 +79,6 @@ func _get_current_user_id(auth_token: String) -> void:
 	]
 
 	var result = http_request.request("https://api.hyplay.com/v1/users/me", headers, HTTPClient.METHOD_GET)
-	if result == OK:
-		print("Fetching user info...")
-	else:
-		print("Failed to initiate user info request. Error code: ", result)
 
 func _get_leaderboard_scores(auth_token: String, limit: int = 25, offset: int = 0) -> void:
 	var headers: PackedStringArray = [
@@ -100,35 +91,19 @@ func _get_leaderboard_scores(auth_token: String, limit: int = 25, offset: int = 
 
 	var result = http_request.request(url, headers, HTTPClient.METHOD_GET)
 
-	if result == OK:
-		print("Fetching leaderboard scores...")
-	else:
-		print("Failed to fetch leaderboard scores. Error code: ", result)
-
 # --- Event Handlers ---
 func _on_request_completed(_result, response_code, _headers, body):
-	print("Request completed with code: ", response_code)
-	print("Response body: ", body.get_string_from_utf8())
 
 	if response_code == 200:
 		var json = JSON.parse_string(body.get_string_from_utf8())
-		print(json)
 		if json.has("username"):
 			# Handle user info request completion
 			if json.has("id"):
 				user_id = json["id"]
-				print("User ID: ", user_id)
-			# Handle score submission response (I think this one isnt working right now, we get error on score submission
-			else:
-				print("Score successfully submitted: ", json)
 		elif json.has("scores"):
 			#Handle leaderboard request completion
-			print("Leaderboard scores: ")
 			for score in json["scores"]:
-				print("Username: ", score["username"], " - Score: ", score["score"])
 				add_score(score["username"], score["score"])
-		else:
-			print("Error parsing JSON response: ", json)
 
 	elif response_code == 400:
 		print("Bad Request: Check the data being sent.")
@@ -146,8 +121,7 @@ func _on_leaderboard_button_pressed() -> void:
 		score_container.remove_child(child)
 	if token != "":
 		_get_leaderboard_scores(token, 25, 0)  # Fetch top 25 scores
-	else:
-		print("Access token not available. Cannot fetch leaderboard.")
+
 
 func _on_login_button_pressed() -> void:
 	_redirect_to_login()

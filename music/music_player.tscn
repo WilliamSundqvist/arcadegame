@@ -1,8 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://y0pgsxggawu8"]
+[gd_scene load_steps=3 format=3 uid="uid://y0pgsxggawu8"]
 
 [ext_resource type="Script" path="res://music/music_player.gd" id="1_10xl6"]
+[ext_resource type="AudioStream" uid="uid://bj5yhdhwq4kpq" path="res://music/bouncybrew.wav" id="1_clpao"]
 
 [node name="MusicPlayer" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_clpao")
 autoplay = true
 bus = &"music"
 script = ExtResource("1_10xl6")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

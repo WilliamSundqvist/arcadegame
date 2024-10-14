@@ -1,15 +1,19 @@
 extends Area2D
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var charge_player: AudioStreamPlayer = $ChargePlayer
+@onready var blast_player: AudioStreamPlayer = $BlastPlayer
 
 var player: PlayerCharacter
 var damage = 50
-var damage_interval = 0.2
+var damage_interval = 0.3
 
 func _ready():
 	animated_sprite_2d.play("aim")
+	charge_player.play()
 	get_tree().create_timer(0.5).timeout.connect(aim_finished)
 
 func aim_finished():
+	blast_player.play()
 	animated_sprite_2d.play("charge")
 	get_tree().create_timer(0.5).timeout.connect(charge_finished)
 

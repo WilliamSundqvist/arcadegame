@@ -4,6 +4,7 @@ const SETTINGS = preload("res://global/settings.tscn")
 @onready var score: Label = $Score
 @onready var cow = preload("res://characters/devil_cow/devil_cow.tscn")
 @onready var result_screen = preload("res://game/result_screen.tscn")
+@onready var cow_spawner: Timer = $cowSpawner
 var cowAlternator  = true
 
 # Called when the node enters the scene tree for the first time.
@@ -26,6 +27,10 @@ func _on_cow_spawner_timeout():
 	add_child(cowEnemy)
 
 func end_game():
+	get_tree().paused = true
 	var result_screen_instance = result_screen.instantiate()
 	result_screen_instance.score = ScoreManager.current_score
 	add_child(result_screen_instance)
+
+func decrease_spawn_timer():
+	cow_spawner.wait_time = cow_spawner.wait_time - 1

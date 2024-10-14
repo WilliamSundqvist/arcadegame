@@ -11,6 +11,11 @@ class_name PlayerCharacter
 @onready var brand_w = load("res://spells/brand_w/BrandW.tscn")
 @onready var lux_r = load("res://spells/lux_r/lux_r.tscn")
 
+@export var m1_label: Label
+@export var q_label: Label
+@export var e_label: Label
+@export var dash_label: Label
+
 
 var current_state: State = null
 var state_moving = preload("res://characters/player_character/states/moving.gd").new()
@@ -35,14 +40,17 @@ func _physics_process(delta):
 	if Input.is_action_pressed("shoot") and fireTimer.is_stopped():
 		shoot()
 		fireTimer.start(fireRate)
+		m1_label.visible = false
 	
 	if Input.is_action_pressed("Q") and q_timer.is_stopped():
 		cast_q_spell()
 		q_timer.start(q_fire_rate)
+		q_label.visible = false
 	
 	if Input.is_action_pressed("E") and e_timer.is_stopped():
 		cast_e_spell()
 		e_timer.start(e_fire_rate)
+		e_label.visible = false
 		
 		
 func change_state(new_state: State):
@@ -96,3 +104,15 @@ func cast_e_spell():
 	level_root.add_child(lux_r_instance)
 	
 	
+
+
+func _on_e_timer_timeout() -> void:
+	e_label.visible = true
+
+
+func _on_q_timer_timeout() -> void:
+	q_label.visible = true
+
+
+func _on_fire_timer_timeout() -> void:
+	m1_label.visible = true

@@ -215,7 +215,6 @@ script = ExtResource("1_jnh66")
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(-34, 12)
 shape = SubResource("CircleShape2D_x7lx4")
 script = ExtResource("2_hrq67")
 
@@ -233,11 +232,14 @@ hitbox_component = NodePath("../HitboxComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_sbuds")
+position = Vector2(45, -40)
 sprite_frames = SubResource("SpriteFrames_uu1jd")
 autoplay = "default"
-frame_progress = 0.420148
+frame_progress = 0.294446
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_gsdpx")
 }
+
+[connection signal="body_entered" from="HitboxComponent" to="HitboxComponent" method="_on_body_entered"]

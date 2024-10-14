@@ -19,11 +19,12 @@ func process(character: PlayerCharacter, delta):
 		canDash = true
 		dashing = false
 		character.availableDashes = character.availableDashes - 1
-		
 		shoot(character, Vector2(0, 100))
 		shoot(character, Vector2(0, -100))
 		shoot(character, Vector2(100, 0))
 		shoot(character, Vector2(-100, 0))
+		if character.availableDashes == 0:
+			character.dash_label.visible = false
 	character.change_state(character.state_moving)
 
 func shoot(character: PlayerCharacter, direction: Vector2):

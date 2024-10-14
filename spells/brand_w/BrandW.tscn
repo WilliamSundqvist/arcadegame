@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://4ug5ffx3rfs3"]
+[gd_scene load_steps=14 format=3 uid="uid://4ug5ffx3rfs3"]
 
 [ext_resource type="Shader" path="res://spells/brand_w/BrandW.gdshader" id="1_f6lqf"]
 [ext_resource type="Script" path="res://spells/brand_w/brand_w.gd" id="1_pbc40"]
 [ext_resource type="Texture2D" uid="uid://jjg72unwrfsy" path="res://spells/brand_w/brandw.png" id="2_k8jeo"]
 [ext_resource type="Texture2D" uid="uid://cw3eubwkhaict" path="res://spells/brand_w/flame_particle.png" id="4_6eaoo"]
+[ext_resource type="AudioStream" uid="uid://cwrgc3pgmssvd" path="res://spells/brand_w/fire_spell.wav" id="5_x38u4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7kqvw"]
 radius = 40.0
@@ -89,6 +90,7 @@ offsets = PackedFloat32Array(0, 0.0533333, 0.24, 0.38, 0.706667, 1)
 colors = PackedColorArray(0.505882, 0.137255, 0.215686, 1, 0.941176, 0.470588, 0.243137, 1, 1, 0.658824, 0.380392, 1, 0.780392, 0.305882, 0.2, 1, 0.572549, 0.156863, 0.243137, 1, 0.372549, 0.101961, 0.160784, 0.486275)
 
 [node name="BrandW" type="Area2D" groups=["Projectile"]]
+audio_bus_name = &"sfx"
 script = ExtResource("1_pbc40")
 
 [node name="CollisionRadius" type="CollisionShape2D" parent="."]
@@ -127,3 +129,7 @@ scale_amount_min = 0.0
 scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_nnab1")
 color_ramp = SubResource("Gradient_aaob3")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_x38u4")
+bus = &"sfx"
